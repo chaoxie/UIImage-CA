@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>294BDCAB-2C25-48EF-BFCE-0EFFA8BC0DC3</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>UIImage+CA_Demo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>C9820395694C6DF743AF4AAEB57EAF1C2F7A89CA</key>
 		<string>github.com:spicyShrimp/UIImage-CA.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>UIImage+CA_Demo.xcodeproj/project.xcworkspace</string>
+	<string>UIImage+CA_Demo.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>C9820395694C6DF743AF4AAEB57EAF1C2F7A89CA</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>C9820395694C6DF743AF4AAEB57EAF1C2F7A89CA</string>
 			<key>IDESourceControlWCCName</key>
-			<string>UIImage+CA_Demo</string>
+			<string>UIImage-CA</string>
 		</dict>
 	</array>
 </dict>

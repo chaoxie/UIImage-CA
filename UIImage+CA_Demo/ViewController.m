@@ -17,12 +17,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.bgView=[[UIImageView alloc]initWithFrame:SCREEN_BOUNCE];
+    //根据设备自动选择需要加载的图片
     UIImage *bgImage=[UIImage imageNamed:@"demo"];
+    //模糊
     self.bgView.image=[UIImage blurImage:bgImage amount:0.5];
     [self.view addSubview:self.bgView];
 }
 //点击截图保存到相册
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    //截屏
     UIImage *screenShotImage=[UIImage screenshot];
     UIImageWriteToSavedPhotosAlbum(screenShotImage, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
 }
