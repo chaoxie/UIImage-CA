@@ -14,4 +14,6 @@
 
 #import "UIImage+CA.h"
 
+#define SCREEN_BOUNCE ([[UIScreen mainScreen] bounds])
+
 #endif

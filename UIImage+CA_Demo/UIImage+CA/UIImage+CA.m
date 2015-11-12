@@ -9,33 +9,60 @@
 #import "UIImage+CA.h"
 #import <Accelerate/Accelerate.h>
 #import <QuartzCore/QuartzCore.h>
+#import <objc/objc-runtime.h>
 
-//4--->.png   4s--->.@2x.png   5(S)--->.568h@2x.png    6(s)--->.667h@2x.png   6P(s)--->@3x.png
-#define __Device_Iphone_5__ ([UIScreen mainScreen].bounds.size.height == 568)//5的高度
-#define __Device_Iphone_6__ ([UIScreen mainScreen].bounds.size.height == 667)//6的高度
+
+//4-->.png   4s-->.@2x.png   5(S)-->.568h@2x.png    6(s)-->.667h@2x.png   6P(s)-->@3x.png
+
+#define __Device_Iphone_5__ (SCREEN_BOUNCE.size.height == 568)
+#define __Device_Iphone_6__ (SCREEN_BOUNCE.size.height == 667)
 
 @implementation UIImage (CA)
 
++ (void)load {
+    if  ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) && (__Device_Iphone_5__||__Device_Iphone_6__) ) {
+        method_exchangeImplementations(class_getClassMethod(self, @selector(imageNamed:)),
+                                       class_getClassMethod(self, @selector(imageMatchSizeWithName:)));
+    }
+}
 + (UIImage *)imageMatchSizeWithName:(NSString *)imageName
 {
-    if (__Device_Iphone_5__)       //iphone5,5s
-    {
-        NSString *ext = [imageName pathExtension];
-        
-        imageName = [imageName stringByDeletingPathExtension];
-        imageName = [imageName stringByAppendingString:@"-568h"];
-        imageName = [imageName stringByAppendingPathExtension:ext];
-    }
-    if (__Device_Iphone_6__)       //iphone6,6s
-    {
-        NSString *ext = [imageName pathExtension];
-        
-        imageName = [imageName stringByDeletingPathExtension];
-        imageName = [imageName stringByAppendingString:@"-667h"];
-        imageName = [imageName stringByAppendingPathExtension:ext];
+    NSMutableString *imageNameMutable = [imageName mutableCopy];
+    
+    //Delete png extension,if present
+    //删除扩展名,如果存在的话
+    NSRange extension = [imageName rangeOfString:@".png" options:NSBackwardsSearch | NSAnchoredSearch];
+    if (extension.location != NSNotFound) {
+        [imageNameMutable deleteCharactersInRange:extension];
     }
     
-    return [UIImage imageNamed:imageName];
+    //Look for @2x to introduce -568h string or -667h string
+    //替换@2x为-56h@2x/-667@2x
+    NSRange retinaAtSymbol = [imageName rangeOfString:@"@2x"];
+    if (retinaAtSymbol.location != NSNotFound) {
+        if (__Device_Iphone_5__) {
+            [imageNameMutable insertString:@"-568h" atIndex:retinaAtSymbol.location];
+        }else if (__Device_Iphone_6__){
+            [imageNameMutable insertString:@"-667h" atIndex:retinaAtSymbol.location];
+        }
+        
+    } else {
+        if (__Device_Iphone_5__) {
+            [imageNameMutable appendString:@"-568h@2x"];
+        }else if (__Device_Iphone_6__){
+            [imageNameMutable appendString:@"-667h@2x"];
+        }
+    }
+    
+    //Check if the image exists and load the new 568 if so or the original name if not
+    //检查568h/667h的图片是否存在,如果存在则加载,如果不存在则加载原来的图片
+    NSString *imagePath = [[NSBundle mainBundle] pathForResource:imageNameMutable ofType:@"png"];
+    if (imagePath) {
+        [imageNameMutable replaceOccurrencesOfString:@"@2x" withString:@"" options:NSBackwardsSearch range:NSMakeRange(0, [imageNameMutable length])];
+        return [UIImage imageMatchSizeWithName:imageNameMutable];
+    } else{
+        return [UIImage imageMatchSizeWithName:imageName];
+    }
 }
 
 + (UIImage *)compressImage:(UIImage *)imgSrc toSize:(CGSize)size
@@ -65,13 +92,7 @@
 + (UIImage *)screenshot
 {
     CGSize imageSize = [[UIScreen mainScreen] bounds].size;
-    
-    if (NULL != UIGraphicsBeginImageContextWithOptions) {
-        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
-    } else {
-        UIGraphicsBeginImageContext(imageSize);
-    }
-    
+    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     for (UIWindow *window in [[UIApplication sharedApplication] windows]) {
@@ -104,6 +125,7 @@
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     
+    //The location of the watermark image
     //水印图片的位置
     [maskImage drawInRect:pos];
     UIImage *resultingImage = UIGraphicsGetImageFromCurrentImageContext();

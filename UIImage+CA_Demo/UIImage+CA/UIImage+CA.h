@@ -13,7 +13,7 @@
 #pragma mark - ImageName
 //According to the different equipment return different images
 //根据不同设备返回不同图片
-+ (UIImage *)imageMatchSizeWithName:(NSString *)imageName;
+//还是调用[UIImage imageNamed:@"demo"];这个方法
 
 #pragma mark - Strech and Resize
 //Drawing pictures
@@ -30,7 +30,6 @@
 //screenshots
 //截屏
 + (UIImage *)screenshot;
-
 #pragma mark - AddImage
 //Add a watermark
 //添加水印
