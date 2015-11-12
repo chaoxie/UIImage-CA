@@ -14,6 +14,7 @@
 		563FA3081BF44FE500A46DC7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 563FA3071BF44FE500A46DC7 /* Images.xcassets */; };
 		563FA30B1BF44FE500A46DC7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 563FA3091BF44FE500A46DC7 /* LaunchScreen.xib */; };
 		563FA3171BF44FE500A46DC7 /* UIImage_CA_DemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 563FA3161BF44FE500A46DC7 /* UIImage_CA_DemoTests.m */; };
+		569B19471BF4512E00C977A2 /* UIImage+CA.m in Sources */ = {isa = PBXBuildFile; fileRef = 569B19461BF4512E00C977A2 /* UIImage+CA.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		563FA3101BF44FE500A46DC7 /* UIImage+CA_DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UIImage+CA_DemoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		563FA3151BF44FE500A46DC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		563FA3161BF44FE500A46DC7 /* UIImage_CA_DemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIImage_CA_DemoTests.m; sourceTree = "<group>"; };
+		569B19451BF4512E00C977A2 /* UIImage+CA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CA.h"; sourceTree = "<group>"; };
+		569B19461BF4512E00C977A2 /* UIImage+CA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CA.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,7 @@
 		563FA2F91BF44FE500A46DC7 /* UIImage+CA_Demo */ = {
 			isa = PBXGroup;
 			children = (
+				569B19441BF4512E00C977A2 /* UIImage+CA */,
 				563FA2FE1BF44FE500A46DC7 /* AppDelegate.h */,
 				563FA2FF1BF44FE500A46DC7 /* AppDelegate.m */,
 				563FA3011BF44FE500A46DC7 /* ViewController.h */,
@@ -117,6 +121,15 @@
 				563FA3151BF44FE500A46DC7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		569B19441BF4512E00C977A2 /* UIImage+CA */ = {
+			isa = PBXGroup;
+			children = (
+				569B19451BF4512E00C977A2 /* UIImage+CA.h */,
+				569B19461BF4512E00C977A2 /* UIImage+CA.m */,
+			);
+			path = "UIImage+CA";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,6 +235,7 @@
 				563FA3031BF44FE500A46DC7 /* ViewController.m in Sources */,
 				563FA3001BF44FE500A46DC7 /* AppDelegate.m in Sources */,
 				563FA2FD1BF44FE500A46DC7 /* main.m in Sources */,
+				569B19471BF4512E00C977A2 /* UIImage+CA.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +432,7 @@
 				563FA31C1BF44FE500A46DC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		563FA31D1BF44FE500A46DC7 /* Build configuration list for PBXNativeTarget "UIImage+CA_DemoTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +441,7 @@
 				563FA31F1BF44FE500A46DC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
