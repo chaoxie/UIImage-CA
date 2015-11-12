@@ -8,8 +8,8 @@ including according to the different images of different equipment selection to 
 1.自动根据设备选择需要的图片
   4\5\6设备尺寸不同,有时候使用一张图片会出现拉伸变形,有时候会根据设备选择需要的图片
   通过该分类可以实现所有代码不变,自动根据设备选择需要的图片即可
-  图片命名为   设备:4-->.png   4s-->.@2x.png   5(S)-->.568h@2x.png    6(s)-->.667h@2x.png   6P(s)-->@3x.png
-  
+  图片命名方式:   
+  设备:4-->.png   4s-->.@2x.png   5(S)-->.568h@2x.png    6(s)-->.667h@2x.png   6P(s)-->@3x.png
   使用方法:[UIImage imageNamed:@"demo"];  与系统方法一致不需要改变,不需要因为接入而修改代码
   
 2.添加了一些常用方法
